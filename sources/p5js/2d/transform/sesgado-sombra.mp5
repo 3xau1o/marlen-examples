@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "1.x",
+  "ml5": false,
+  "sound": false,
+  "lang": "ts",
+  "sketch": "function setup() {\n  createCanvas(400, 400);\n}\n\nfunction draw() {\n  background(240);\n  \n  // Posición calculada para que el CONJUNTO (Kirby + Sombra) quede centrado.\n  let posX = 130; \n  let posY = 200; \n  let size = 180;\n  \n  // 1. DIBUJAR LA SOMBRA (Detrás)\n  push();\n  // El ancla de la sombra es la \"base\" de Kirby (posY + la mitad de su tamaño)\n  translate(posX, posY + size / 2);\n  \n  // Aplastamos la sombra en Y para que parezca que está en el suelo (0.8)\n  scale(1, 0.8); \n  \n  // Sesgamos la sombra hacia la derecha (arriba y a la derecha)\n  shearX(-PI / 4); \n  \n  noStroke();\n  fill(0, 0, 0, 40); // Sombra gris semitransparente\n  \n  // Dibujamos el círculo de la sombra desplazado hacia arriba (-size/2)\n  circle(0, -size / 2, size);\n  pop();\n\n  // 2. DIBUJAR A KIRBY (Al frente)\n  kirbyHead(posX, posY, size);\n}\n\n// Función Simplificada: Solo la cabeza/cuerpo principal\nfunction kirbyHead(x, y, s){\n  push();\n  translate(x, y);\n  strokeWeight(s * 0.02);\n  stroke(0);\n  \n  // Cuerpo (Cara)\n  fill(\"#FDCDE7\"); // Rosa\n  circle(0, 0, s);\n  \n  // Ojos\n  noStroke();\n  fill(0);\n  ellipse(-s*0.12, -s*0.17, s*0.1, s*0.28);\n  ellipse(s*0.12, -s*0.17, s*0.1, s*0.28);\n  fill(255);\n  ellipse(-s*0.12, -s*0.235, s*0.1, s*0.14);\n  ellipse(s*0.12, -s*0.235, s*0.1, s*0.14);\n  noFill();\n  stroke(0);\n  ellipse(-s*0.12, -s*0.17, s*0.1, s*0.28);\n  ellipse(s*0.12, -s*0.17, s*0.1, s*0.28);\n  \n  // Mejillas\n  noStroke();\n  fill(255, 0, 0, 100);\n  ellipse(s*0.26, -s*0.02, s*0.2, s*0.1);\n  ellipse(-s*0.26, -s*0.02, s*0.2, s*0.1);\n  \n  // Boca\n  noFill();\n  stroke(0);\n  arc(0, s*0.0, s*0.15, s*0.15, PI*0.2, PI*0.8);\n  pop();\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}

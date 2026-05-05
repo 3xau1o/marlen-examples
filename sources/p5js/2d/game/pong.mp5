@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "sketch": "// --- Variables Globales ---\nlet pelota = { x: 300, y: 200, vx: 5, vy: 5, r: 10 };\nlet jugador = { x: 20, y: 200, w: 10, h: 80, score: 0 };\nlet cpu = { x: 580, y: 200, w: 10, h: 80, score: 0 };\n\nfunction setup() {\n  createCanvas(600, 400);\n  rectMode(CENTER); // Dibuja los rectángulos desde su centro, ¡haciendo los cálculos más fáciles!\n}\n\nfunction draw() {\n  background(0);\n\n  // 1. Dibujar la red\n  stroke(255, 100);\n  strokeWeight(2);\n  for (let i = 0; i < height; i += 30) {\n    line(width / 2, i, width / 2, i + 15);\n  }\n\n  // 2. Dibujar la puntuación\n  noStroke();\n  fill(255);\n  textSize(40);\n  textAlign(CENTER, CENTER);\n  text(jugador.score, width / 4, 50);\n  text(cpu.score, 3 * width / 4, 50);\n\n  // 3. Movimiento del Jugador (Usando el truco fluido de keyIsDown)\n  if (keyIsDown(UP_ARROW)) {\n    jugador.y -= 6;\n  }\n  if (keyIsDown(DOWN_ARROW)) {\n    jugador.y += 6;\n  }\n  \n  // Evitar que el jugador salga de la pantalla\n  jugador.y = constrain(jugador.y, jugador.h / 2, height - jugador.h / 2);\n\n  // 4. Movimiento de la",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}

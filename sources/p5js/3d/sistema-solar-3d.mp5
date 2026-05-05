@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "projectType": "p5js",
+  "lang": "ts",
+  "sketch": "// --- CONSTANTES DE DISTANCIA ---\nconst DISTANCIA_VENUS = 75;\nconst DISTANCIA_TIERRA = 125;\nconst DISTANCIA_LUNA = 25;\nconst DISTANCIA_MARTE = 170;\n\nlet angulo = 0;\n\nfunction setup() {\n  createCanvas(400, 400, WEBGL);\n  angleMode(DEGREES);\n  \n  noStroke(); \n  shininess(100); \n  specularMaterial(255); \n}\n\nfunction draw() {\n  background(10); \n  orbitControl();\n\n  ambientLight(150); \n  pointLight(255, 255, 255, 0, 0, 0); \n\n  rotateX(-30); \n\n  // ==========================================\n  // OPTIMIZACIÓN: DIBUJAR TODAS LAS ÓRBITAS JUNTAS\n  // Usamos un solo push/pop y un solo rotateX(90) para todas\n  // ==========================================\n  push();\n  rotateX(90); \n  noFill();\n  stroke(255, 255, 255, 70);\n  strokeWeight(1);\n  circle(0, 0, DISTANCIA_VENUS * 2);\n  circle(0, 0, DISTANCIA_TIERRA * 2);\n  circle(0, 0, DISTANCIA_MARTE * 2);\n  pop(); \n\n  // --- EL SOL ---\n  push();\n    emissiveMaterial(255, 200, 0); \n    sphere(45); \n  pop();\n\n  // --- PLANETA 1: VENUS ---\n  push();\n    rotateY(angulo * 1.5); \n    translate(DISTANCIA_VENUS, 0, 0); \n    ambientMaterial(222, 184, 135); \n    sphere(10); \n  pop();\n\n  // --- PLANETA 2: TIERRA Y LUNA ---\n  push();\n    rotateY(angulo);       \n    translate(DISTANCIA_TIERRA, 0, 0);   \n    ambientMaterial(50, 120, 255); \n    sphere(16); \n    \n    // La Luna sí necesita su propio push/pop para su órbita, \n    // porque su centro es la Tierra, no el Sol.\n    push();\n      rotateX(90);\n      noFill();\n      stroke(255, 255, 255, 70);\n      strokeWeight(0.5);\n      circle(0, 0, DISTANCIA_LUNA * 2);\n    pop();\n\n    push();               \n      rotateY(angulo * 8);  \n      translate(-DISTANCIA_LUNA, 0, 0); \n      ambientMaterial(200); \n      sphere(5);      \n    pop();                \n  \n  pop();                \n\n  // --- PLANETA 3: MARTE ---\n  push();\n    rotateY(angulo * 0.6); \n    translate(DISTANCIA_MARTE, 0, 0); \n    ambientMaterial(200, 50, 50); \n    sphere(14);\n  pop();\n\n  angulo += 0.5; \n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": [],
+  "settings": {
+    "p5Version": "2.x",
+    "useMl5": 0,
+    "useSound": 0
+  }
+}

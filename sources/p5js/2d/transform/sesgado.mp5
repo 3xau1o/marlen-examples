@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "projectType": "p5js",
+  "lang": "ts",
+  "sketch": "function setup() {\n  createCanvas(400, 400);\n  rectMode(CENTER);\n  textAlign(CENTER, CENTER); // Centra el texto tanto en X como en Y\n}\n\nfunction draw() {\n  background(240);\n  \n  // Dibujar líneas divisorias de los cuadrantes\n  stroke(200);\n  line(200, 0, 200, 400);\n  line(0, 200, 400, 200);\n  \n  noStroke();\n  let size = 80; // Tamaño del cuadrado\n  let angle = PI / 6; // Ángulo de inclinación (30 grados)\n\n  // --- CUADRANTE 1: SUPERIOR IZQUIERDO (Centro en 100, 100) ---\n  push();\n  translate(100, 100);\n  fill(150, 150, 150);\n  rect(0, 0, size, size);\n  pop();\n  \n  fill(0);\n  text(\"Original\", 100, 170);\n\n  // --- CUADRANTE 2: SUPERIOR DERECHO (Centro en 300, 100) ---\n  push();\n  translate(300, 100);\n  shearX(angle); \n  fill(255, 100, 100);\n  rect(0, 0, size, size);\n  pop();\n  \n  fill(0);\n  text(\"Shear X\\n(Sesgado X)\", 300, 170);\n\n  // --- CUADRANTE 3: INFERIOR IZQUIERDO (Centro en 100, 300) ---\n  push();\n  translate(100, 300);\n  shearY(angle);\n  fill(100, 100, 255);\n  rect(0, 0, size, size);\n  pop();\n  \n  fill(0);\n  text(\"Shear Y\\n(Sesgado Y)\", 100, 370);\n\n  // --- CUADRANTE 4: INFERIOR DERECHO (Centro en 300, 300) ---\n  push();\n  translate(300, 300);\n  shearX(angle);\n  shearY(angle);\n  fill(100, 200, 100);\n  rect(0, 0, size, size);\n  pop();\n  \n  fill(0);\n  text(\"Shear X & Y\", 300, 370);\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": [],
+  "settings": {
+    "p5Version": "1.x",
+    "useMl5": 0,
+    "useSound": 0
+  }
+}

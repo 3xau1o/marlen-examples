@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "sketch": "function setup() {\n  createCanvas(400, 400);\n  colorMode(HSB, 360, 100, 100); \n  angleMode(DEGREES);\n  textAlign(CENTER, CENTER);\n  textSize(14);\n}\n\nfunction draw() {\n  background(0, 0, 95); \n  \n  translate(width / 2, height / 2);\n  \n  // 1. Dibujar líneas fijas (Oscuras, como referencia)\n  for (let a = 0; a < 360; a += 45) {\n    push();\n    rotate(a);\n    \n    stroke(0, 0, 20); \n    strokeWeight(2);\n    line(0, 0, 100, 0);\n    \n    noStroke();\n    fill(0, 0, 20);\n    text(a + '°', 130, 0);\n    pop();\n  }\n\n  // 2. Manecilla vinculada a los frames\n  // frameCount avanza 1 por cada ejecución de draw()\n  let currentAngle = frameCount % 360;\n\n  push();\n  rotate(currentAngle);\n  \n  // El Hue (Matiz) coincide exactamente con su ángulo\n  stroke(currentAngle, 100, 100); \n  strokeWeight(4);\n  line(0, 0, 115, 0);\n  \n  // Círculo en la punta\n  fill(currentAngle, 100, 100);\n  noStroke();\n  circle(115, 0, 10);\n  pop();\n\n  // Eje central\n  fill(0, 0, 0);\n  circle(0, 0, 8);\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}

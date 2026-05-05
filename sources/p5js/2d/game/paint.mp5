@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "sketch": "let strokeWeightValue = 5\nlet strokeColor = [0, 0, 0]\n\nfunction setup() {\n  createCanvas(600, 400)\n  background(255)\n}\n\nfunction draw() {\n  // Draw UI\n  fill(200)\n  noStroke()\n  rect(0, 0, width, 50)\n  \n  // Color buttons\n  fill(255, 0, 0)\n  rect(10, 10, 20, 20)\n  fill(0, 255, 0)\n  rect(40, 10, 20, 20)\n  fill(0, 0, 255)\n  rect(70, 10, 20, 20)\n  fill(0)\n  rect(100, 10, 20, 20)\n  \n  // Size buttons\n  fill(255)\n  textAlign(CENTER, CENTER)\n  text('1', 140, 20)\n  text('5', 170, 20)\n  text('10', 200, 20)\n}\n\nfunction mousePressed() {\n  // Color selection\n  if (mouseY < 30) {\n    if (mouseX > 10 && mouseX < 30) strokeColor = [255, 0, 0]\n    else if (mouseX > 40 && mouseX < 60) strokeColor = [0, 255, 0]\n    else if (mouseX > 70 && mouseX < 90) strokeColor = [0, 0, 255]\n    else if (mouseX > 100 && mouseX < 120) strokeColor = [0, 0, 0]\n    // Size selection\n    else if (mouseX > 130 && mouseX < 150) strokeWeightValue = 1\n    else if (mouseX > 160 && mouseX < 180) strokeWeightValue = 5\n    else if (mouseX > 190 && mouseX < 210) strokeWeightValue = 10\n  }\n}\n\nfunction mouseDragged() {\n  if (mouseY > 50) {\n    stroke(strokeColor)\n    strokeWeight(strokeWeightValue)\n    line(pmouseX, pmouseY, mouseX, mouseY)\n  }\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}

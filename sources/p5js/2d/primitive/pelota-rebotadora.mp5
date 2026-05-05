@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "sketch": "let ball = { x: 200, y: 200, vx: 3, vy: 2, r: 20 }\n\nfunction setup() {\n  createCanvas(400, 400)\n}\n\nfunction draw() {\n  background(220)\n  \n  // Update ball position\n  ball.x += ball.vx\n  ball.y += ball.vy\n  \n  // Bounce off walls\n  if (ball.x < ball.r || ball.x > width - ball.r) ball.vx *= -1\n  if (ball.y < ball.r || ball.y > height - ball.r) ball.vy *= -1\n  \n  // Draw ball\n  fill(255, 0, 0)\n  noStroke()\n  circle(ball.x, ball.y, ball.r * 2)\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}

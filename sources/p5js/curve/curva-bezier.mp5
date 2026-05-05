@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "ml5": false,
+  "lang": "ts",
+  "sketch": "// Arreglo para almacenar las coordenadas de los 4 puntos.\nlet pts = [\n  { x: 50,  y: 350 }, // Anclaje 1\n  { x: 50,  y: 50  }, // Control 1\n  { x: 350, y: 50  }, // Control 2\n  { x: 350, y: 350 }  // Anclaje 2\n];\n\nlet draggedPoint = -1;\n\nfunction setup() {\n  createCanvas(400, 400);\n}\n\nfunction draw() {\n  background(200);\n\n  // 1. Dibujar líneas guía\n  stroke(255, 0, 0, 150);\n  strokeWeight(2);\n  line(pts[0].x, pts[0].y, pts[1].x, pts[1].y);\n  line(pts[3].x, pts[3].y, pts[2].x, pts[2].y);\n\n  // 2. Dibujar la curva Bézier\n  noFill();\n  stroke(0);\n  strokeWeight(3);\n  bezier(\n    pts[0].x, pts[0].y, \n    pts[1].x, pts[1].y, \n    pts[2].x, pts[2].y, \n    pts[3].x, pts[3].y\n  );\n\n  // 3. Dibujar los puntos interactivos\n  strokeWeight(12);\n  stroke(0);\n  point(pts[0].x, pts[0].y);\n  point(pts[3].x, pts[3].y);\n  stroke(255, 0, 0);\n  point(pts[1].x, pts[1].y);\n  point(pts[2].x, pts[2].y);\n\n  // 4. PUNTO ANIMADO SIGUIENDO LA TRAYECTORIA\n  // Calculamos 't' para que oscile entre 0 y 1 usando seno\n  let t = 0.5 * sin(frameCount * 0.02) + 0.5;\n  \n  // Calculamos x e y en base al tiempo 't'\n  let xAnim = bezierPoint(pts[0].x, pts[1].x, pts[2].x, pts[3].x, t);\n  let yAnim = bezierPoint(pts[0].y, pts[1].y, pts[2].y, pts[3].y, t);\n\n  // Dibujamos el círculo blanco\n  fill(255);\n  stroke(0);\n  strokeWeight(2);\n  circle(xAnim, yAnim, 15);\n}\n\nfunction mousePressed() {\n  for (let i = 0; i < pts.length; i++) {\n    if (dist(mouseX, mouseY, pts[i].x, pts[i].y) < 15) {\n      draggedPoint = i;\n      break;\n    }\n  }\n}\n\nfunction mouseReleased() { draggedPoint = -1; }\n\nfunction mouseDragged() {\n  if (draggedPoint > -1) {\n    pts[draggedPoint].x = mouseX;\n    pts[draggedPoint].y = mouseY;\n  }\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}

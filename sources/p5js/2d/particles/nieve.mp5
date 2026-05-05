@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "ml5": false,
+  "sound": false,
+  "lang": "ts",
+  "sketch": "// Definimos el tamaño del lienzo a 400x400 como solicitaste\nconst ancho = 400;\nconst alto = 400;\n\n// Este arreglo guardará todos los objetos \"copo de nieve\" que vayamos creando\nlet copos_de_nieve = [];\n\nfunction setup() {\n  // Inicializamos el lienzo con las variables de ancho y alto\n  createCanvas(ancho, alto);\n}\n\nfunction draw() {\n  // Pintamos el fondo de un gris muy oscuro en cada fotograma\n  background(20);\n\n  // Hay un 50% de probabilidad en cada fotograma de generar un nuevo copo\n  if (random() < 0.5) {\n    copos_de_nieve.push({\n      pos_x: random(0, ancho),      // Posición horizontal inicial aleatoria\n      pos_y: 0,                     // Inicia en la parte superior de la pantalla\n      vel_x: random(-0.5, 0.5),     // Ligero movimiento lateral (simulando viento)\n      vel_y: random(-3, 3),         // Velocidad vertical (Nota: con valores negativos algunos copos subirán)\n      tamano: random(1, 10)                    // Diámetro del copo de nieve\n    });\n  }\n\n  // Establecemos el color de relleno en blanco para la nieve\n  fill('white');\n\n  // Recorremos la lista de copos uno por uno\n  for (const copo of copos_de_nieve) {\n    // Actualizamos la posición de cada copo sumándole su velocidad\n    copo.pos_x += copo.vel_x;\n    copo.pos_y += copo.vel_y;\n\n    // Dibujamos el copo en su nueva posición\n    circle(\n      copo.pos_x,\n      copo.pos_y,\n      copo.tamano\n    );\n  }\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}

@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "ml5": false,
+  "sound": false,
+  "lang": "ts",
+  "sketch": "// Definimos la clase Particle declarando los tipos de sus propiedades\nclass Particle {\n  x: number;\n  y: number;\n  vx: number;\n  vy: number;\n  alpha: number;\n\n  constructor(x: number, y: number) {\n    this.x = x;\n    this.y = y;\n    // Velocidad aleatoria en los ejes X e Y\n    this.vx = random(-2, 2);\n    this.vy = random(-2, 2);\n    // Nivel de opacidad inicial (totalmente visible)\n    this.alpha = 255;\n  }\n  \n  // Actualiza la posición y reduce la opacidad\n  update(): void {\n    this.x += this.vx;\n    this.y += this.vy;\n    this.alpha -= 5; // Se desvanece gradualmente\n  }\n  \n  // Dibuja la partícula en el lienzo\n  show(): void {\n    noStroke();\n    // Usamos this.alpha para la transparencia\n    fill(100, 150, 255, this.alpha);\n    circle(this.x, this.y, 8);\n  }\n  \n  // Devuelve true si la partícula ya es invisible\n  finished(): boolean {\n    return this.alpha < 0;\n  }\n}\n\n// Declaramos un arreglo estrictamente tipado para almacenar las partículas\nlet particles: Particle[] = [];\n\nfunction setup(): void {\n  createCanvas(400, 400);\n}\n\nfunction draw(): void {\n  background(20, 20, 40); // Fondo oscuro\n  \n  // Agregamos nuevas partículas en la posición del ratón si se hace clic\n  if (mouseIsPressed) {\n    for (let i = 0; i < 5; i++) {\n      particles.push(new Particle(mouseX, mouseY));\n    }\n  }\n  \n  // Recorremos el arreglo de atrás hacia adelante para evitar problemas al eliminar elementos\n  for (let i = particles.length - 1; i >= 0; i--) {\n    particles[i].update();\n    particles[i].show();\n    \n    // Eliminamos la partícula del arreglo si ya terminó su ciclo (es invisible)\n    if (particles[i].finished()) {\n      particles.splice(i, 1);\n    }\n  }\n  \n  // Instrucciones (Texto arriba y centrado)\n  fill(255);\n  textAlign(CENTER, CENTER);\n  // Movido a la coordenada Y = 30 para que quede en la parte superior\n  text('Haz clic y arrastra para crear partículas', width / 2, 30); \n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}

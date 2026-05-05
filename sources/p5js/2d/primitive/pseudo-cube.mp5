@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "sketch": "function setup() {\n  createCanvas(300, 300, WEBGL);\n  \n  // Changes the camera to orthographic, removing perspective stretching!\n  ortho(); \n\n  describe('A purple cube wireframe spinning on a black canvas.');\n}\n\nfunction draw() {\n  background(255);\n\n  // Style the box.\n  noFill();\n  stroke(0);\n\n  // Rotate the coordinates.\n  rotateX(frameCount * 0.01);\n  rotateY(frameCount * 0.01);\n\n  // Draw the box.\n  box(135);\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": [
+    {
+      "level": "log",
+      "message": "test3",
+      "timestamp": 1772430893493
+    },
+    {
+      "level": "log",
+      "message": "test3",
+      "timestamp": 1772430893507
+    }
+  ]
+}

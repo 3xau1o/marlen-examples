@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "1.x",
+  "ml5": true,
+  "lang": "js",
+  "sketch": "/*\n * 👋 Hello! This is an ml5.js example made and shared with ❤️.\n * Learn more about the ml5.js project: https://ml5js.org/\n * ml5.js license and Code of Conduct: https://github.com/ml5js/ml5-next-gen/blob/main/LICENSE.md\n *\n * This example demonstrates face tracking on live video through ml5.faceMesh.\n */\n\nlet faceMesh;\nlet video;\nlet faces = [];\nlet options = { maxFaces: 1, refineLandmarks: false, flipHorizontal: false };\n\nfunction preload() {\n  // Load the faceMesh model\n  faceMesh = ml5.faceMesh(options);\n}\n\nfunction setup() {\n  createCanvas(640, 480);\n  // Create the webcam video and hide it\n  video = createCapture(VIDEO);\n  video.size(640, 480);\n  video.hide();\n  // Start detecting faces from the webcam video\n  faceMesh.detectStart(video, gotFaces);\n}\n\nfunction draw() {\n  // Draw the webcam video\n  image(video, 0, 0, width, height);\n\n  // Draw all the tracked face points\n  for (let i = 0; i < faces.length; i++) {\n    let face = faces[i];\n    for (let j = 0; j < face.keypoints.length; j++) {\n      let keypoint = face.keypoints[j];\n      fill(0, 255, 0);\n      noStroke();\n      circle(keypoint.x, keypoint.y, 5);\n    }\n  }\n}\n\n// Callback function for when faceMesh outputs data\nfunction gotFaces(results) {\n  // Save the output to the faces variable\n  faces = results;\n}\n",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": [
+    {
+      "level": "log",
+      "message": "\n🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈\n🌟 Thank you for using ml5.js v1.3.1 🌟\n\nPlease read our community statement to ensure \nthat the use of this software reflects the values \nof the ml5.js community:\n↳ https://ml5js.org/about\n\nReporting: \n↳ https://github.com/ml5js/ml5-next-gen/issues\n↳ Email: info@ml5js.org \n🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈",
+      "timestamp": 1772633389571
+    }
+  ]
+}

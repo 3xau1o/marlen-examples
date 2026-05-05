@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "projectType": "p5js",
+  "lang": "ts",
+  "sketch": "let sliderX, sliderY;\n\nfunction setup() {\n  createCanvas(400, 400);\n  rectMode(CENTER);\n  textAlign(CENTER, CENTER);\n\n  // --- SLIDER X (Horizontal - Borde Superior) ---\n  sliderX = createSlider(-3, 3, 1, 0.1);\n  // Lo centramos horizontalmente dejando 30px de margen a cada lado\n  sliderX.position(30, 15);\n  sliderX.style('width', '340px'); \n\n  // --- SLIDER Y (Vertical - Borde Derecho) ---\n  sliderY = createSlider(-3, 3, 1, 0.1);\n  \n  // TRUCO MATEMÁTICO ACTUALIZADO PARA 400x400:\n  // Al rotar 90 grados, el slider gira sobre su propio centro.\n  // Si su ancho es 340, su centro original está a +170px en X y +10px en Y.\n  // Para que quede vertical en el borde derecho (centro en X=380, Y=200),\n  // ajustamos su posición inicial a (210, 190).\n  sliderY.position(210, 190); \n  sliderY.style('width', '340px');\n  sliderY.style('transform', 'rotate(90deg)'); \n}\n\nfunction draw() {\n  background(220);\n\n  let valX = sliderX.value();\n  let valY = sliderY.value();\n\n  // --- DIBUJAR PAC-MAN ---\n  push();\n    // Movemos el origen al centro del nuevo lienzo de 400x400\n    translate(width / 2, height / 2);\n    \n    // Aplicamos escala en X y en Y\n    scale(valX, valY);\n\n    // 1. Cuerpo de Pac-Man (Amarillo)\n    // Aumentamos el tamaño a 150 para que se vea mejor en el lienzo más grande\n    fill(255, 255, 0);\n    noStroke();\n    arc(0, 0, 150, 150, QUARTER_PI, TWO_PI - QUARTER_PI, PIE);\n\n    // 2. Ojo de Pac-Man (Negro)\n    // Ajustamos la posición y tamaño del ojo en proporción al nuevo cuerpo\n    fill(0);\n    ellipse(0, -35, 18, 18);\n  pop();\n\n  // --- TEXTO DE CÓDIGO EN PANTALLA ---\n  // Fondo semitransparente para que el texto sea siempre legible\n  noStroke();\n  fill(255, 200);\n  // La posición width/2 y height-30 asegura que siempre quede centrado abajo\n  rect(width / 2, height - 30, 220, 35, 10); \n\n  fill(0);\n  textSize(18);\n  textStyle(BOLD);\n  text(`scale(${valX.toFixed(1)}, ${valY.toFixed(1)})`, width / 2, height - 30);\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": [],
+  "settings": {
+    "p5Version": "1.x",
+    "useMl5": 0,
+    "useSound": 0
+  }
+}

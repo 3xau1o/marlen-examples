@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "projectType": "p5js",
+  "lang": "ts",
+  "sketch": "/*\n * 👋 ¡Hola clase! Este es un ejemplo de ml5.js.\n * En este ejercicio vamos a usar Inteligencia Artificial para detectar \n * objetos en vivo utilizando nuestra cámara web.\n */\n// 👇 Le decimos a TypeScript que confíe en que 'ml5' existe globalmente\ndeclare const ml5: any;\n\nlet video;\nlet detector;\n// Este arreglo (array) guardará la lista de objetos que la IA logre reconocer\nlet detections = []; \n\n// preload() se ejecuta antes de que inicie el programa para cargar archivos o modelos pesados\nfunction preload() {\n  // \"cocossd\" es el modelo de IA pre-entrenado que usaremos. \n  // Ya sabe reconocer 80 tipos de objetos comunes (personas, sillas, perros, etc.)\n  detector = ml5.objectDetection(\"cocossd\"); \n}\n\n// setup() se ejecuta una sola vez al principio para configurar el entorno\nfunction setup() {\n  createCanvas(640, 480); // Creamos nuestro lienzo de dibujo (canvas)\n\n  // Activamos la cámara web de la computadora\n  video = createCapture(VIDEO);\n  video.size(width, height);\n  // Ocultamos el video original de HTML para no verlo dos veces (solo lo veremos en el canvas)\n  video.hide(); \n\n  // ¡Le decimos al detector que empiece a analizar el video continuamente!\n  // Cada vez que analice un fotograma, llamará a la función 'gotDetections'\n  detector.detectStart(video, gotDetections);\n}\n\n// Esta es nuestra función \"callback\". \n// Se activa automáticamente cada vez que el modelo encuentra resultados.\nfunction gotDetections(results) {\n  // Actualizamos nuestra variable con los resultados más recientes\n  detections = results;\n}\n\n// draw() se ejecuta en bucle, unas 60 veces por segundo, para dibujar en la pantalla\nfunction draw() {\n  // 1. Dibujamos el fotograma actual de la cámara como fondo\n  image(video, 0, 0);\n\n  // 2. Usamos un bucle (loop) para revisar todos los objetos que la IA encontró\n  for (let i = 0; i < detections.length; i += 1) {\n    let detection = detections[i]; // Tomamos un objeto a la vez\n\n    // 3. Dibujamos un rectángulo (caja delimitadora) alrededor del objeto detectado\n    stroke(0, 255, 0); // Color de la línea: Verde brillante\n    strokeWeight(4);   // Grosor de la línea\n    noFill();          // Que el rectángulo sea transparente por dentro\n    rect(detection.x, detection.y, detection.width, detection.height);\n\n    // 4. Escribimos la etiqueta (el nombre del objeto) que la IA predijo\n    noStroke();        // Quitamos el borde para el texto\n    fill(255);         // Color del texto: Blanco\n    textSize(24);      // Tamaño de la letra\n    // detection.label contiene el nombre (ej. \"person\", \"cell phone\")\n    text(detection.label, detection.x + 10, detection.y + 24);\n  }\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": [
+    {
+      "level": "log",
+      "text": "\n🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈\n🌟 Thank you for using ml5.js v1.3.1 🌟\n\nPlease read our community statement to ensure \nthat the use of this software reflects the values \nof the ml5.js community:\n↳ https://ml5js.org/about\n\nReporting: \n↳ https://github.com/ml5js/ml5-next-gen/issues\n↳ Email: info@ml5js.org \n🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈",
+      "timestamp": 1777262936437
+    }
+  ],
+  "settings": {
+    "p5Version": "1.x",
+    "useMl5": true,
+    "useSound": false
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "p5_ver": "2.x",
+  "ml5": false,
+  "sound": false,
+  "lang": "ts",
+  "sketch": "function setup() {\n  createCanvas(400, 400);\n  background(220); // Un fondo un poco más claro para que resalten los colores\n\n  frameRate(60);\n\n  describe('Un lienzo interactivo donde aparecen círculos de colores al mover el ratón. Al hacer clic, el lienzo se limpia.');\n\n  mostrarInstrucciones();\n}\n\nfunction draw() {\n  // Solo dibujamos si el mouse se está moviendo (opcional, pero ayuda a la limpieza)\n  if (mouseX !== pmouseX || mouseY !== pmouseY) {\n    let r = random(255);\n    let g = random(255);\n    let b = random(255);\n    \n    noStroke(); // Quitamos el borde a los círculos para que se vea más fluido\n    fill(r, g, b, 150); // Añadimos un poco de transparencia (150) para un efecto genial\n    circle(mouseX, mouseY, 50);\n  }\n}\n\nfunction mousePressed() {\n  clear();\n  background(220);\n  mostrarInstrucciones();\n}\n\n// Función mejorada con emojis y nueva instrucción\nfunction mostrarInstrucciones() {\n  fill(50); \n  noStroke();\n  textSize(18);\n  textAlign(CENTER, TOP);\n  \n  // Usamos un template string para organizar mejor el texto\n  text(\"🎨 ¡Mueve el mouse para pintar!\", width / 2, 20);\n  \n  textSize(14);\n  text(\"✨ Haz clic para limpiar 🧹\", width / 2, 45);\n}",
+  "notes": "",
+  "files": {},
+  "preview": "",
+  "console": []
+}
